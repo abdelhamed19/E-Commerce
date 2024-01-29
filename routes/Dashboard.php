@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 //
 //Route::resource("dash/categories",CategoriesController::class)->middleware("auth");
 
-Route::middleware("auth")->prefix("dashboard")->group(function (){
+Route::middleware(["auth","CheckRole:super-admin,admin"])->prefix("dashboard")->group(function (){
 
     Route::get("profileEdit", [ProfileController::class,"edit"])->name("dashboard.edit.profile");
     Route::patch("updateProfile", [ProfileController::class,"update"])->name("dashboard.update.profile");

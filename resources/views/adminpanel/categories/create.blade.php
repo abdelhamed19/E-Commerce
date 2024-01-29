@@ -7,6 +7,6 @@
 @section("content")
     <form action="{{route("categories.store")}}" method="post" enctype="multipart/form-data">
         @csrf
-        @include("adminpanel.products._form",["btn"=>"Create"])
+        @include("adminpanel.categories._form",["btn"=>"Create"])
     </form>
 @endsection

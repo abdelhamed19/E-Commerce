@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
     public $timestamps=false;
-    protected $fillabale=["name","slug"];
+    protected $guarded=[];
 
     public function products()
     {

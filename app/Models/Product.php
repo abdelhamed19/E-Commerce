@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use App\Models\Scopes\theprod;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use NumberFormatter;
 
 class Product extends Model
 {
@@ -41,25 +43,34 @@ class Product extends Model
     {
         static::addGlobalScope("theprod",new theprod);
     }
-    public static function rules($id=0)
-    {
-        return [
-            "name"=> ["required","string","min:2","max:30"],
-            "description"=> ["required","string","min:2","max:255"],
-            "price"=> ["required","int"],
-            "Compare_Price"=> ["required","int"],
-            "status"=> ["in:active,draft,archvied"],
-            "category_id"=> ["required","int"],
-
-        ];
-    }
-
     public function Scopeactive(Builder $builder)
     {
         $builder->where("status","=","active");
     }
-
-
+    public function getImageUrlAttribute()
+    {
+        if(!$this->image) {
+            return asset('storage/product/No-Image.png');
+        }
+        if(Str::startsWith($this->image,["https://","https://"])){
+            return $this->image;
+        }
+        return asset('storage/'.$this->image);
+    }
+    public function getComparePricePercentageAttribute()
+    {
+        if($this->Compare_Price)
+        {
+            $percentage=100 -(100 * $this->price / $this->Compare_Price);
+            return round($percentage);
+        }
+    }
+    public function getNewAttribute()
+    {
+        if (Carbon::parse($this->created_at)->isToday()) {
+            return True;
+        }
+    }
 }
 
 

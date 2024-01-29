@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories\CategorySTore;
+use App\Http\Requests\Categories\CategoryUpdate;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -47,19 +49,16 @@ class CategoriesController extends Controller
         return view("adminpanel.categories.create",compact("parent","category"));
     }
 
-    public function store(Request $request)
+    public function store(CategorySTore $request)
     {
-        // 1- Validation
-        $request->validate(Category::rules());
-
-        // 2- Adding Slug
+        // 1- Adding Slug
         $request->merge([
             "slug"=>Str::slug($request->name)]);
 
-        // 3- Exepting the request image, and allow all
+        // 2- Exepting the request image, and allow all
         $data=$request->except("image");
 
-        // 4- Add the path to the request
+        // 3- Add the path to the request
         $data['image']=$this->uploadimage($request);
 
         // 5- Save the request into DB
@@ -86,11 +85,8 @@ class CategoriesController extends Controller
     }
 
 
-    public function update(CategoryRequest $request, string $id)
+    public function update(CategoryUpdate $request, string $id)
     {
-        // 1- Validation
-        //$request->validate(Category::rules($id));
-
         // 2- Find The Category
         $category= Category::findorFail($id);
 

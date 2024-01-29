@@ -1,5 +1,5 @@
-<x-front-layout >
-    {{-- <x-slot name="breadcrump">
+<x-Front-Layout >
+    <x-slot name="breadcrumb">
         <div class="breadcrumbs">
             <div class="container">
                 <div class="row align-items-center">
@@ -11,13 +11,13 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <ul class="breadcrumb-nav">
                             <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
-                            <li>Login</li>
+                            {{-- <li>Login</li> --}}
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </x-slot> --}}
+    </x-slot>
 
         <!-- Start Hero Area -->
         <section class="hero-area">
@@ -98,7 +98,7 @@
             </div>
         </section>
         <!-- End Hero Area -->
-    
+
         <!-- Start Featured Categories Area -->
         <section class="featured-categories section">
             <div class="container">
@@ -218,7 +218,7 @@
             </div>
         </section>
         <!-- End Features Area -->
-    
+
         <!-- Start Trending Product Area -->
         <section class="trending-product section">
             <div class="container">
@@ -244,7 +244,7 @@
             </div>
         </section>
         <!-- End Trending Product Area -->
-    
+
         <!-- Start Banner Area -->
         <section class="banner section">
             <div class="container">
@@ -277,7 +277,7 @@
             </div>
         </section>
         <!-- End Banner Area -->
-    
+
         <!-- Start Special Offer -->
         <section class="special-offer section">
             <div class="container">
@@ -451,7 +451,7 @@
             </div>
         </section>
         <!-- End Special Offer -->
-    
+
         <!-- Start Home Product List -->
         <section class="home-product-list section">
             <div class="container">
@@ -586,7 +586,7 @@
             </div>
         </section>
         <!-- End Home Product List -->
-    
+
         <!-- Start Brands Area -->
         <div class="brands">
             <div class="container">
@@ -626,7 +626,7 @@
             </div>
         </div>
         <!-- End Brands Area -->
-    
+
         <!-- Start Blog Section Area -->
         <section class="blog-section section">
             <div class="container">
@@ -711,7 +711,7 @@
             </div>
         </section>
         <!-- End Blog Section Area -->
-    
+
         <!-- Start Shipping Info -->
         <section class="shipping-info">
             <div class="container">
@@ -760,4 +760,5 @@
             </div>
         </section>
         <!-- End Shipping Info -->
-</x-front-layout>
+        @extends('layouts.FrontHomeScripts')
+</x-Front-Layout>
