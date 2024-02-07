@@ -50,7 +50,7 @@ class Product extends Model
     public function getImageUrlAttribute()
     {
         if(!$this->image) {
-            return asset('storage/product/No-Image.png');
+            return asset('images/No-Image.png');
         }
         if(Str::startsWith($this->image,["https://","https://"])){
             return $this->image;

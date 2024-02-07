@@ -298,15 +298,6 @@
                                     <li class="nav-item">
                                         <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
                                     </li>
-                                    @auth
-                                    <form action="{{ route("logout") }}" method="POST">
-                                        @csrf
-                                        <li class="nav-item">
-                                            <button type="submit">Logout</button>
-                                        </li>
-                                    </form>
-                                    @endauth
-
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav>

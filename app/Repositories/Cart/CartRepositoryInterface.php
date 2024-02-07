@@ -7,8 +7,8 @@ interface CartRepositoryInterface
 {
     public function getCart();
     public function addToCart(Product $product, $qty = 1);
-    public function updateCart(Product $product, $qty);
-    public function deleteFromCart(Product $product);
+    public function updateCart($id, $qty);
+    public function deleteFromCart($id);
     public function clearCart();
     public function total();
 }
