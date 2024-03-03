@@ -1,10 +1,10 @@
 <x-Front-Layout title="Cart">
-    <x-alret type="success" />
     <div class="shopping-cart section">
         <div class="container">
             <div class="cart-list-head">
                 <!-- Cart List Title -->
                 <div class="cart-list-title">
+                    <x-alret type="success" />
                     <div class="row">
                         <div class="col-lg-1 col-md-1 col-12">
                         </div>
@@ -46,11 +46,16 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12">
                                     <div class="count-input">
-                                        <input type="number" value="{{ $item->quantity }}">
+                                        <form action="{{ route("cart.update",$item->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input name="quantity" type="number" value="{{ $item->quantity }}">
+                                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12">
-                                    <p>{{ Currency::format($item->product->price * $item->quantity) }}</p>
+                                    <p class="item-price">{{ Currency::format($item->product->price * $item->quantity) }}</p>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12">
                                     <p>{{ Currency::format($item->product->Compare_Price - $item->product->price) }}</p>
@@ -112,5 +117,4 @@
             </div>
         </div>
     </div>
-
 </x-Front-Layout>

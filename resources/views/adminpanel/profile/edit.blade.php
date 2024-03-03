@@ -11,7 +11,7 @@
         @csrf
         <div class="form-group">
             <x-form.input label="First Name" name="firstName"  value="{{$user->profile->firstName}}" />
-    
+
         </div>
 
         <div class="form-group">
@@ -56,7 +56,7 @@
                 <label for="country">country</label>
         <select name="country" class="form-control form-select">
         <option value="">Country</option>
-            @foreach($countries as $value=>$text)
+            @foreach($countries as $value => $text)
                 <option value="{{ $value }}" @selected($value == $user->profile->country) >{{ $text }}</option>
             @endforeach
         </select>
@@ -84,7 +84,7 @@
     </select>
     </div>
 
-    
+
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

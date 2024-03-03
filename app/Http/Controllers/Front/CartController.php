@@ -43,7 +43,7 @@ class CartController extends Controller
         ]);
         $product=Product::find($request->product_id);
         $this->repository->addToCart($product, $request->quantity);
-        return redirect()->back()->with("success","Product added to cart");
+        return redirect()->route("home")->with("success","Product added to cart");
     }
 
     /**
@@ -65,14 +65,13 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
       $request->validate([
-            "product_id" => "required|exists:products,id",
-            "qty" => "required|numeric|min:1",
+            "quantity" => "required|numeric|min:1",
         ]);
-        $product=Product::find($request->product_id);
-        $this->repository->updateCart($product, $request->qty);
+        $this->repository->updateCart($id, $request->quantity);
+        return redirect()->back()->with("success","Cart updated");
     }
 
     /**
