@@ -15,6 +15,12 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
     protected $guarded=[];
+    protected $hidden=[
+        "created_at","updated_at","deleted_at",'image'
+    ];
+    protected $appends=[
+        "image_url"
+    ];
 
     public function category()
     {
@@ -42,6 +48,9 @@ class Product extends Model
     public static function booted()
     {
         static::addGlobalScope("theprod",new theprod);
+        static::creating(function (Product $product){
+            $product->slug = Str::slug($product->name);
+        });
     }
     public function Scopeactive(Builder $builder)
     {
@@ -70,6 +79,25 @@ class Product extends Model
         if (Carbon::parse($this->created_at)->isToday()) {
             return True;
         }
+    }
+    public function scopeApi(Builder $builder,$filters)
+    {
+        $builder->when($filters["store_id"] ?? false,function ($builder, $value){
+            $builder->where("store_id","=",$value);
+        });
+        $builder->when($filters["category_id"] ?? false,function ($builder, $value){
+            $builder->where("category_id","=",$value);
+        });
+        $builder->when($filters["tag"] ?? false,function ($builder, $value){
+            $builder->whereRaw("ID IN (SELECT product_id FROM product_tag where tag_id = ?)",$value);
+        });
+        // $builder->when($filters["tag"] ?? false,function ($builder, $value){
+        //   $builder->whereRaw("EXISTS ( SELECT 1 FROM product_tag where tag_id = ?  AND product_id  = products.id)", [$value])
+        // });
+
+        // $builder->when($filters["tag"] ?? false,function ($builder, $value){
+        //     $builder->whereRaw("ID IN (SELECT product_id FROM product_tag where tag_id = (SELECT id FROM tags where name LIKE ?))",["%$value%"]);
+        // });
     }
 }
 

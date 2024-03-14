@@ -100,12 +100,12 @@
                                 <div class="right">
                                     <ul>
                                         <li>Cart Subtotal<span>{{ $repository->total() }}</span></li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
+                                        <li>Shipping<span>0</span></li>
+                                        <li>You Save<span>0</span></li>
+                                        <li class="last">You Pay<span>{{ $repository->total() }}</span></li>
                                     </ul>
                                     <div class="button">
-                                        <a href="checkout.html" class="btn">Checkout</a>
+                                        <a href="{{ route('checkout.create') }}" class="btn">Checkout</a>
                                         <a href="{{ route("home") }}" class="btn btn-alt">Continue shopping</a>
                                     </div>
                                 </div>

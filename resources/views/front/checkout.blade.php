@@ -39,6 +39,11 @@
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[billing][first_name]"
                                                                 placeholder="First Name">
+                                                                @error("first_name")
+                                                                <div class="text-danger ">
+                                                                    {{$message}}
+                                                                </div>
+                                                                @enderror
                                                         </div>
                                                         <div class="col-md-6 form-input form">
                                                             <input type="text" name="addr[billing][last_name]"
